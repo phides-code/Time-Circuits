@@ -4,6 +4,9 @@
 const express = require("express");
 const morgan = require("morgan");
 
+// import functions from handlers
+// const {} = require("./handlers");
+
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -15,19 +18,17 @@ express()
   // Any requests for static files will go into the public folder
   .use(express.static("public"))
 
-  // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
 
   // add new endpoints here ☝️
   // ---------------------------------
-  // Nothing to modify below this line
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {
     res.status(404).json({
       status: 404,
-      message: "This is obviously not what you are looking for.",
+      message: "There does not seem to be anything here.",
     });
   })
 
