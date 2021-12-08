@@ -5,7 +5,7 @@ const express = require("express");
 const morgan = require("morgan");
 
 // import functions from handlers
-// const {} = require("./handlers");
+const { getAllUsers, userLogin } = require("./handlers");
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -21,6 +21,8 @@ express()
   // ---------------------------------
   // add new endpoints here 👇
 
+  .get("/api/users", getAllUsers)
+  .post("/api/userlogin", userLogin)
   // add new endpoints here ☝️
   // ---------------------------------
 

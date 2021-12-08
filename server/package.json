@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^10.0.0",
@@ -11,6 +11,6 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "start:server": "nodemon index.js"
+    "dev": "nodemon index.js"
   }
 }
