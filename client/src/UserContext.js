@@ -7,6 +7,17 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
 
+  const sendUserToDb = async () => {
+    const res = await fetch(`/api/userlogin`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...user }),
+    });
+    const fetchResponse = await res.json();
+    console.log(`got fetchResponse: `);
+    console.log(fetchResponse);
+  };
+
   useEffect(() => {
     console.log(`running Context useEffect...`);
     if (isAuthenticated) {
@@ -16,17 +27,6 @@ export const UserProvider = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  const sendUserToDb = async () => {
-    const res = await fetch(`/api/userlogin`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...user }),
-    });
-    const data = await res.json();
-    console.log(`got data: `);
-    console.log(data);
-  };
-
   return (
     <UserContext.Provider
       value={{
@@ -35,7 +35,6 @@ export const UserProvider = ({ children }) => {
         user,
         isAuthenticated,
         isLoading,
-        sendUserToDb,
       }}
     >
       {children}

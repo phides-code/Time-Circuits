@@ -4,6 +4,7 @@ import App from "./App";
 
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UserProvider } from "./UserContext";
+import FontStyles from "./fontStyles";
 
 require("dotenv").config();
 
@@ -15,6 +16,7 @@ ReactDOM.render(
       redirectUri={window.location.origin}
     >
       <UserProvider>
+        <FontStyles />
         <App />
       </UserProvider>
     </Auth0Provider>
