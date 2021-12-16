@@ -20,19 +20,47 @@ const Keypad = () => {
 
   return (
     <Wrapper>
-      {keys &&
-        keys.map((key) => {
-          return (
-            <KeyDiv>
-              <Key>{key}</Key>
-            </KeyDiv>
-          );
-        })}
+      <SideButtons>
+        <RedButton />
+        <OrangeButton />
+        <GreenButton />
+        <GreyButton />
+        <GreyButton />
+      </SideButtons>
+      <InnerWrapper>
+        {keys &&
+          keys.map((key) => {
+            return (
+              <KeyDiv>
+                <Key>{key}</Key>
+              </KeyDiv>
+            );
+          })}
+      </InnerWrapper>
     </Wrapper>
   );
 };
 
+const SideButtons = styled.div``;
+const SideButton = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 25%;
+  background: yellow;
+  margin: 5px 10px 10px 10px;
+`;
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+`;
+
+const RedButton = styled(SideButton)``;
+const OrangeButton = styled(SideButton)``;
+const GreenButton = styled(SideButton)``;
+const GreyButton = styled(SideButton)``;
+
+const InnerWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -43,7 +71,6 @@ const Wrapper = styled.div`
   color: black;
   height: 200px;
   width: 180px;
-  margin-top: 200px;
 `;
 
 const Key = styled.button`

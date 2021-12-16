@@ -3,26 +3,40 @@ import { Link } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { UserContext } from "./UserContext";
+import styled from "styled-components";
 
 const Header = () => {
   const { isAuthenticated } = useContext(UserContext);
   return (
-    <div>
-      <Link to="/">Go Home</Link>
+    <Wrapper>
+      <HeaderLink>
+        <Link to="/">Go Home</Link>
+      </HeaderLink>
+
       {isAuthenticated ? (
-        <div>
-          <Link to="/profile">Go to Profile</Link>
-          <div>
+        <>
+          <HeaderLink>
+            <Link to="/profile">Go to Profile</Link>
+          </HeaderLink>
+
+          <HeaderLink>
             <LogoutButton />
-          </div>
-        </div>
+          </HeaderLink>
+        </>
       ) : (
-        <div>
+        <HeaderLink>
           <LoginButton />
-        </div>
+        </HeaderLink>
       )}
-    </div>
+    </Wrapper>
   );
 };
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
+const HeaderLink = styled.div`
+  margin: 0px 10px;
+`;
 export default Header;
