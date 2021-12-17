@@ -4,7 +4,7 @@ import App from "./App";
 
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UserProvider } from "./UserContext";
-import FontStyles from "./fontStyles";
+import FontStyles from "./FontStyles";
 
 require("dotenv").config();
 

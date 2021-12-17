@@ -1,31 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import metalbackground from "./images/metal.jpg";
 import RedLabels from "./RedLabels";
 import DateTimeBar from "./DateTimeBar";
+import moment from "moment";
 
 const TimeCircuits = () => {
+  const [currentDate, setCurrentDate] = useState(
+    moment(new Date()).format("YYYYMMDDHHmm")
+  );
+
+  const [blink, setBlink] = useState(true);
+
+  useEffect(() => {
+    const myInterval = setInterval(() => {
+      setCurrentDate(moment(new Date()).format("YYYYMMDDHHmm"));
+      setBlink(!blink);
+    }, 500);
+
+    return () => {
+      clearInterval(myInterval);
+    };
+  });
+
   return (
     <Wrapper>
       <RedLabels />
       <DateTimeBar
         color={"tomato"}
-        label={"DESTINATION TIME"}
+        label={"DESTINATION " + "\xa0\xa0" + "  TIME"}
         date={"198512311221"}
+        blink={blink}
       />
 
       <RedLabels />
       <DateTimeBar
         color={"lime"}
-        label={"PRESENT TIME"}
-        date={"198510261321"}
+        label={"PRESENT " + "\xa0\xa0" + "  TIME"}
+        date={currentDate}
+        blink={blink}
       />
 
       <RedLabels />
       <DateTimeBar
         color={"orange"}
-        label={"LAST TIME DEPARTED"}
-        date={"198510261321"}
+        label={"LAST " + "\xa0\xa0" + " TIME " + "\xa0\xa0" + " DEPARTED "}
+        date={"198510260000"}
+        blink={blink}
       />
     </Wrapper>
   );

@@ -31,7 +31,7 @@ const Keypad = () => {
         {keys &&
           keys.map((key) => {
             return (
-              <KeyDiv>
+              <KeyDiv key={key}>
                 <Key>{key}</Key>
               </KeyDiv>
             );
@@ -41,13 +41,15 @@ const Keypad = () => {
   );
 };
 
-const SideButtons = styled.div``;
+const SideButtons = styled.div`
+  background: seashell;
+`;
 const SideButton = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 25%;
-  background: yellow;
-  margin: 5px 10px 10px 10px;
+  background: red;
+  margin: 5px 10px 5px 10px;
 `;
 const Wrapper = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
-const DateTimeBar = ({ label, color, date }) => {
+const DateTimeBar = ({ label, color, date, blink }) => {
   const dateObj = new Date(
     date.slice(0, 4),
     date.slice(4, 6) - 1,
@@ -24,9 +24,42 @@ const DateTimeBar = ({ label, color, date }) => {
         <Month>{moment(dateObj).format("MMM")}</Month>
         <Day>{moment(dateObj).format("DD")}</Day>
         <Year>{moment(dateObj).format("YYYY")}</Year>
-        {moment(dateObj).format("a")}
+        <Ampm>
+          <RedLabel>AM</RedLabel>
+          <AmpmLed
+            className={moment(dateObj).format("a") != "am" && "off"}
+            style={{
+              background: `${color}`,
+              boxShadow: `0 0 42px ${color}, 0 0 82px ${color}, 0 0 92px ${color}`,
+            }}
+          />
+          <RedLabel>PM</RedLabel>
+          <AmpmLed
+            className={moment(dateObj).format("a") != "pm" && "off"}
+            style={{
+              background: `${color}`,
+              boxShadow: `0 0 42px ${color}, 0 0 82px ${color}, 0 0 92px ${color}`,
+            }}
+          />
+        </Ampm>
+
         <Hour>{moment(dateObj).format("hh")}</Hour>
-        <Blinkers></Blinkers>
+        <Blinkers>
+          <Led
+            className={blink && "off"}
+            style={{
+              background: `${color}`,
+              boxShadow: `0 0 42px ${color}, 0 0 82px ${color}, 0 0 92px ${color}`,
+            }}
+          />
+          <Led
+            className={blink && "off"}
+            style={{
+              background: `${color}`,
+              boxShadow: `0 0 42px ${color}, 0 0 82px ${color}, 0 0 92px ${color}`,
+            }}
+          />
+        </Blinkers>
         <Min>{moment(dateObj).format("mm")}</Min>
       </DateTime>
       <BlackLabel>{label}</BlackLabel>
@@ -36,6 +69,37 @@ const DateTimeBar = ({ label, color, date }) => {
 
 const Wrapper = styled.div`
   text-align: center;
+  border-bottom: 10px solid dimgray;
+`;
+
+const Ampm = styled.div`
+  position: relative;
+  bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
+`;
+
+const RedLabel = styled.div`
+  font-family: "Eurostile Extended";
+  position: relative;
+  font-size: small;
+  padding: 0px 5px;
+  background: #800020;
+  color: white;
+`;
+
+const BlackLabel = styled.div`
+  font-family: "Eurostile Extended";
+  margin: 5px 0px;
+  display: inline-block;
+  background: black;
+  color: white;
+  padding: 2px 15px;
+  font-size: 16px;
 `;
 
 const DateTime = styled.div`
@@ -67,14 +131,22 @@ const Hour = styled(DateTimeValue)`
 const Min = styled(DateTimeValue)`
   width: 67px;
 `;
-const Blinkers = styled.div``;
+const Blinkers = styled.div`
+  margin-top: 5px;
+`;
 
-const BlackLabel = styled.div`
-  margin: 5px 0px;
-  display: inline-block;
-  background: black;
-  color: white;
-  padding: 0px 5px;
+const Led = styled.div`
+  margin-top: 8px;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  &.off {
+    filter: brightness(25%);
+  }
+`;
+
+const AmpmLed = styled(Led)`
+  margin: 3px 0px;
 `;
 
 export default DateTimeBar;
