@@ -27,7 +27,7 @@ const DateTimeBar = ({ label, color, date, blink }) => {
         <Ampm>
           <RedLabel>AM</RedLabel>
           <AmpmLed
-            className={moment(dateObj).format("a") != "am" && "off"}
+            className={moment(dateObj).format("a") !== "am" && "off"}
             style={{
               background: `${color}`,
               boxShadow: `0 0 42px ${color}, 0 0 82px ${color}, 0 0 92px ${color}`,
@@ -35,7 +35,7 @@ const DateTimeBar = ({ label, color, date, blink }) => {
           />
           <RedLabel>PM</RedLabel>
           <AmpmLed
-            className={moment(dateObj).format("a") != "pm" && "off"}
+            className={moment(dateObj).format("a") !== "pm" && "off"}
             style={{
               background: `${color}`,
               boxShadow: `0 0 42px ${color}, 0 0 82px ${color}, 0 0 92px ${color}`,
@@ -123,7 +123,7 @@ const Day = styled(DateTimeValue)`
   width: 67px;
 `;
 const Year = styled(DateTimeValue)`
-  width: 120px;
+  width: 132px;
 `;
 const Hour = styled(DateTimeValue)`
   width: 67px;

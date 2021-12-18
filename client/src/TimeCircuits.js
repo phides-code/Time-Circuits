@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import metalbackground from "./images/metal.jpg";
 import RedLabels from "./RedLabels";
 import DateTimeBar from "./DateTimeBar";
 import moment from "moment";
+import { TimeContext } from "./TimeContext";
 
 const TimeCircuits = () => {
-  const [currentDate, setCurrentDate] = useState(
-    moment(new Date()).format("YYYYMMDDHHmm")
-  );
-
+  const { currentDate, setCurrentDate, destinationTime, setDestinationTime } =
+    useContext(TimeContext);
   const [blink, setBlink] = useState(true);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const TimeCircuits = () => {
       <DateTimeBar
         color={"tomato"}
         label={"DESTINATION " + "\xa0\xa0" + "  TIME"}
-        date={"198512311221"}
+        date={destinationTime}
         blink={blink}
       />
 
@@ -45,7 +44,7 @@ const TimeCircuits = () => {
       <DateTimeBar
         color={"orange"}
         label={"LAST " + "\xa0\xa0" + " TIME " + "\xa0\xa0" + " DEPARTED "}
-        date={"198510260000"}
+        date={"195511122204"}
         blink={blink}
       />
     </Wrapper>

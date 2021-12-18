@@ -14,8 +14,8 @@ export const UserProvider = ({ children }) => {
       body: JSON.stringify({ ...user }),
     });
     const fetchResponse = await res.json();
-    console.log(`got fetchResponse: `);
-    console.log(fetchResponse);
+    console.log(`got fetchResponse.message: ${fetchResponse.message}`);
+    // console.log(fetchResponse);
   };
 
   useEffect(() => {

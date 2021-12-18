@@ -1,41 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { TimeContext } from "./TimeContext";
 
 const Keypad = () => {
-  const [keys, setKeys] = useState();
+  const [keyTime, setKeyTime] = useState("");
 
-  useEffect(() => {
-    const keysArr = [];
+  const { destinationTime, setDestinationTime } = useContext(TimeContext);
 
-    for (let i = 1; i <= 10; i++) {
-      if (i === 10) {
-        keysArr.push(0);
-      } else {
-        keysArr.push(i);
-      }
-    }
-
-    setKeys(keysArr);
-  }, []);
+  const keysArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   return (
     <Wrapper>
       <SideButtons>
-        <RedButton />
+        <RedButton
+          onClick={() => {
+            setKeyTime("");
+          }}
+        />
         <OrangeButton />
-        <GreenButton />
+        <GreenButton
+          onClick={() => {
+            if (keyTime.length === 12) {
+              setDestinationTime(keyTime);
+              setKeyTime("");
+            }
+          }}
+        />
         <GreyButton />
         <GreyButton />
       </SideButtons>
       <InnerWrapper>
-        {keys &&
-          keys.map((key) => {
-            return (
-              <KeyDiv key={key}>
-                <Key>{key}</Key>
-              </KeyDiv>
-            );
-          })}
+        {keysArr.map((key) => {
+          return (
+            <KeyDiv key={key}>
+              <Key
+                onClick={() => {
+                  if (keyTime.length < 12) {
+                    setKeyTime(keyTime + key);
+                  }
+                }}
+              >
+                {key}
+              </Key>
+            </KeyDiv>
+          );
+        })}
       </InnerWrapper>
     </Wrapper>
   );
@@ -44,11 +53,11 @@ const Keypad = () => {
 const SideButtons = styled.div`
   background: seashell;
 `;
-const SideButton = styled.div`
+const SideButton = styled.button`
+  display: flex;
   width: 34px;
   height: 34px;
-  border-radius: 25%;
-  background: red;
+  border-radius: 50%;
   margin: 5px 10px 5px 10px;
 `;
 const Wrapper = styled.div`
@@ -57,10 +66,18 @@ const Wrapper = styled.div`
   margin-top: 50px;
 `;
 
-const RedButton = styled(SideButton)``;
-const OrangeButton = styled(SideButton)``;
-const GreenButton = styled(SideButton)``;
-const GreyButton = styled(SideButton)``;
+const RedButton = styled(SideButton)`
+  background: red;
+`;
+const OrangeButton = styled(SideButton)`
+  background: orange;
+`;
+const GreenButton = styled(SideButton)`
+  background: green;
+`;
+const GreyButton = styled(SideButton)`
+  background: dimgray;
+`;
 
 const InnerWrapper = styled.div`
   display: flex;
