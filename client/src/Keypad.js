@@ -51,19 +51,25 @@ const Keypad = () => {
 };
 
 const SideButtons = styled.div`
-  background: seashell;
+  /* background: seashell; */
+  background: dimgrey;
+  padding-right: 10px;
+  position: relative;
+  bottom: 15px;
 `;
 const SideButton = styled.button`
   display: flex;
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  margin: 5px 10px 5px 10px;
+  margin: 5px 10px;
 `;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 50px;
+  margin-top: 5px;
+  background-color: dimgrey;
+  padding: 32px 16px;
 `;
 
 const RedButton = styled(SideButton)`
@@ -87,12 +93,14 @@ const InnerWrapper = styled.div`
   align-items: stretch;
   align-content: stretch;
   background: seashell;
+  /* background: dimgrey; */
   color: black;
   height: 200px;
   width: 180px;
 `;
 
 const Key = styled.button`
+  font-size: x-large;
   height: 100%;
   box-shadow: 4px 4px rgba(150, 150, 150, 0.4);
 `;
